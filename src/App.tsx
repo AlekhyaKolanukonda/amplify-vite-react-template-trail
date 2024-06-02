@@ -1,5 +1,5 @@
 
-import { Authenticator } from '@aws-amplify/ui-react'
+/*import { Authenticator } from '@aws-amplify/ui-react'
 import '@aws-amplify/ui-react/styles.css'
 
 
@@ -57,4 +57,122 @@ function App() {
   );
 }
 
+export default App;*/
+
+
+
+import React, {  useState} from 'react';
+
+
+import './App.css';
+import { Authenticator } from '@aws-amplify/ui-react'
+import '@aws-amplify/ui-react/styles.css'
+
+
+
+
+
+
+
+function App() {
+
+
+const [emailid, setEmailid] = useState('');
+const [subject, setSubject] = useState('');
+const [body, setBody] = useState('');
+
+const handleEmailidChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+  setEmailid(event.target.value);
+};
+
+const handleSubjectChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+  setSubject(event.target.value);
+};
+
+const handleBodyChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+  setBody(event.target.value);
+};
+
+const handleSubmit =  (e:any) => {
+  e.preventDefault();
+  console.log(emailid);
+  console.log(subject);
+  console.log(body);
+ try{
+  const response = fetch(' https://1ln15on441.execute-api.ap-south-1.amazonaws.com/ses/', {
+      method: 'POST',
+      body: JSON.stringify({
+        emailid: emailid,
+        subject: subject,
+        body: body,
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    });
+    const data =JSON.stringify(response);
+    console.log(response);
+ }
+ catch (error) {
+  console.error('Error sending email:', error);
+}
+
+  
+
+
+};
+
+
+
+
+  return (
+    <div className='App'>
+      <Authenticator>
+          {({ signOut, }) => (
+              <main>
+                <header className='App-header'>
+                  <title>Email Submission Form</title>
+                  <div>
+                      <h1>Email Submission Form</h1>
+                      <p>The email will be sent only to verified identities in the SES.</p>
+                      <form onSubmit={handleSubmit} >
+                          <div className="form-group">
+                              <label htmlFor="emailid">Email ID:</label>
+                              <input type="text" id="emailid" name="emailid" value={emailid} onChange={handleEmailidChange} /><br/><br/>
+                          </div>
+                          
+                          <div className="form-group">
+                              <label htmlFor="subject">Subject:</label>
+                              <input type="text" id="subject" name="subject" value={subject} onChange={handleSubjectChange} /><br/><br/>
+                          </div>
+                          
+                          <div className="form-group">
+                              <label htmlFor="body">Body:</label>
+                              <textarea cols={100} rows={40} value={body} onChange={handleBodyChange} ></textarea><br/>
+                          </div>
+                          
+                          <button type="submit">Submit</button>
+                      </form>
+                  </div>
+                  </header>
+
+                  <button onClick={signOut}>Sign out</button>
+
+              </main>
+          )}
+      </Authenticator>
+    </div>
+  );
+
+
+}
+
+
+
+
+
+
+
+
 export default App;
+
