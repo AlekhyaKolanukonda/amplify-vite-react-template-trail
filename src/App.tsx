@@ -110,7 +110,6 @@ const handleSubmit =  (e:any) => {
         'Content-type': 'application/json; charset=UTF-8',
       },
     });
-    const data =JSON.stringify(response);
     console.log(response);
  }
  catch (error) {
