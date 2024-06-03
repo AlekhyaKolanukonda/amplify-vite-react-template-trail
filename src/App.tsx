@@ -68,15 +68,7 @@ import './App.css';
 import { Authenticator } from '@aws-amplify/ui-react'
 import '@aws-amplify/ui-react/styles.css'
 
-
-
-
-
-
-
 function App() {
-
-
 const [emailid, setEmailid] = useState('');
 const [subject, setSubject] = useState('');
 const [body, setBody] = useState('');
@@ -111,19 +103,13 @@ const handleSubmit =  (e:any) => {
       },
     });
     console.log(response);
+    window.alert('Email sent successfully');
+    location.reload();
  }
  catch (error) {
   console.error('Error sending email:', error);
 }
-
-  
-
-
 };
-
-
-
-
   return (
     <div className='App'>
       <Authenticator>
@@ -163,7 +149,6 @@ const handleSubmit =  (e:any) => {
     </div>
   );
 
-
 }
 
 
@@ -174,4 +159,3 @@ const handleSubmit =  (e:any) => {
 
 
 export default App;
-
