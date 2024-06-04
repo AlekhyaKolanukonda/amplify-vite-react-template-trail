@@ -110,10 +110,10 @@ function App() {
       response
         .then((response) => response.json())
         .then((data) => { 
-          //alert(JSON.stringify(data))         
+                  
           if (data == "ok") alert("Email sent successfully");
           else alert("Mail Id not registered with SES");
-          // location.reload();
+          location.reload();
         })
         .catch((err) => {
           console.log(err);
