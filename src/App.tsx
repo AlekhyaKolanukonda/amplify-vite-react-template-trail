@@ -61,9 +61,7 @@ export default App;*/
 
 
 
-import React, {  useState} from 'react';
-
-
+import {useState} from 'react';
 import './App.css';
 import { Authenticator } from '@aws-amplify/ui-react'
 import '@aws-amplify/ui-react/styles.css'
@@ -73,7 +71,7 @@ const [emailid, setEmailid] = useState('');
 const [subject, setSubject] = useState('');
 const [body, setBody] = useState('');
 
-const handleEmailidChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+/*const handleEmailidChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
   setEmailid(event.target.value);
 };
 
@@ -83,7 +81,7 @@ const handleSubjectChange = (event: { target: { value: React.SetStateAction<stri
 
 const handleBodyChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
   setBody(event.target.value);
-};
+};*/
 
 const handleSubmit =  (e:any) => {
   e.preventDefault();
@@ -102,9 +100,18 @@ const handleSubmit =  (e:any) => {
         'Content-type': 'application/json; charset=UTF-8',
       },
     });
-    console.log(response);
-    window.alert('Email sent successfully');
-    location.reload();
+    response
+        .then((response) => response.json())
+        .then((data) => { 
+                  
+          if (data == "ok") alert("Email sent successfully");
+          else alert("Mail Id not registered with SES");
+          location.reload();
+        })
+        .catch((err) => {
+          console.log(err);
+          throw err;
+        });
  }
  catch (error) {
   console.error('Error sending email:', error);
@@ -123,17 +130,17 @@ const handleSubmit =  (e:any) => {
                       <form onSubmit={handleSubmit} >
                           <div className="form-group">
                               <label htmlFor="emailid">Email ID:</label>
-                              <input type="text" id="emailid" name="emailid" value={emailid} onChange={handleEmailidChange} /><br/><br/>
+                              <input type="text" id="emailid" name="emailid" onChange={(e=>setEmailid(e.target.value))} /><br/><br/>
                           </div>
                           
                           <div className="form-group">
                               <label htmlFor="subject">Subject:</label>
-                              <input type="text" id="subject" name="subject" value={subject} onChange={handleSubjectChange} /><br/><br/>
+                              <input type="text" id="subject" name="subject" onChange={(e=>setSubject(e.target.value))} /><br/><br/>
                           </div>
                           
                           <div className="form-group">
                               <label htmlFor="body">Body:</label>
-                              <textarea cols={100} rows={40} value={body} onChange={handleBodyChange} ></textarea><br/>
+                              <textarea cols={100} rows={40} onChange={(e=>setBody(e.target.value))} ></textarea><br/>
                           </div>
                           
                           <button type="submit">Submit</button>
