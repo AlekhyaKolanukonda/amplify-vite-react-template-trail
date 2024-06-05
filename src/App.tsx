@@ -1,4 +1,3 @@
-
 /*import { Authenticator } from '@aws-amplify/ui-react'
 import '@aws-amplify/ui-react/styles.css'
 
@@ -61,23 +60,27 @@ export default App;*/
 
 
 
-import {useState} from 'react';
+import  { useState} from 'react';
+
+
 import './App.css';
 import { Authenticator } from '@aws-amplify/ui-react'
 import '@aws-amplify/ui-react/styles.css'
 
 function App() {
-const [emailid, setEmailid] = useState('');
-const [subject, setSubject] = useState('');
-const [body, setBody] = useState('');
+  const [emailid, setEmailid] = useState("");
+  const [subject, setSubject] = useState("");
+  const [body, setBody] = useState("");
 
 /*const handleEmailidChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
   setEmailid(event.target.value);
 };
 
-const handleSubjectChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
-  setSubject(event.target.value);
-};
+  const handleSubjectChange = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setSubject(event.target.value);
+  };
 
 const handleBodyChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
   setBody(event.target.value);
@@ -118,7 +121,7 @@ const handleSubmit =  (e:any) => {
 }
 };
   return (
-    <div className='App'>
+    <div className="App">
       <Authenticator>
           {({ signOut, }) => (
               <main>
@@ -130,17 +133,17 @@ const handleSubmit =  (e:any) => {
                       <form onSubmit={handleSubmit} >
                           <div className="form-group">
                               <label htmlFor="emailid">Email ID:</label>
-                              <input type="text" id="emailid" name="emailid" onChange={(e=>setEmailid(e.target.value))} /><br/><br/>
+                              <input type="text" id="emailid" name="emailid"  onChange={(e)=>setEmailid(e.target.value)} /><br/><br/>
                           </div>
                           
                           <div className="form-group">
                               <label htmlFor="subject">Subject:</label>
-                              <input type="text" id="subject" name="subject" onChange={(e=>setSubject(e.target.value))} /><br/><br/>
+                              <input type="text" id="subject" name="subject"  onChange={(e)=>setSubject(e.target.value)} /><br/><br/>
                           </div>
                           
                           <div className="form-group">
                               <label htmlFor="body">Body:</label>
-                              <textarea cols={100} rows={40} onChange={(e=>setBody(e.target.value))} ></textarea><br/>
+                              <textarea cols={100} rows={40}  onChange={(e)=>setBody(e.target.value)} ></textarea><br/>
                           </div>
                           
                           <button type="submit">Submit</button>
@@ -148,21 +151,12 @@ const handleSubmit =  (e:any) => {
                   </div>
                   </header>
 
-                  <button onClick={signOut}>Sign out</button>
-
-              </main>
-          )}
+            <button onClick={signOut}>Sign out</button>
+          </main>
+        )}
       </Authenticator>
     </div>
   );
-
 }
-
-
-
-
-
-
-
 
 export default App;
